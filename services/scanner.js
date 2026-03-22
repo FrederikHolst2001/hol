@@ -13,7 +13,9 @@ exports.run=async()=>{
 
  for(let pair of pairs){
   try{
-   let r=await axios.get(`https://api.twelvedata.com/time_series?symbol=${pair}&interval=5min&outputsize=100&apikey=${API_KEY}`);
+   let pairAPI = pair.replace("/", "");
+   
+   let r=await axios.get(`https://api.twelvedata.com/time_series?symbol=${pairAPI}&interval=5min&outputsize=100&apikey=${API_KEY}`);
    let closes=r.data.values.reverse().map(x=>+x.close);
    let candles=r.data.values.reverse().map(x=>({high:+x.high,low:+x.low}));
 
