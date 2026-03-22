@@ -5,7 +5,9 @@ const API_KEY=process.env.DATA_KEY;
 
 exports.run=async(symbol,from,to)=>{
  try{
-  let r=await axios.get(`https://api.twelvedata.com/time_series?symbol=${symbol}&interval=5min&outputsize=2000&apikey=${API_KEY}`);
+  symbol = symbol.replace("/", ""); // FIX
+
+  let r = await axios.get(`https://api.twelvedata.com/time_series?symbol=${symbol}&interval=5min&outputsize=2000&apikey=${API_KEY}`);
   let vals=r.data.values.reverse();
   let candles=vals.map(v=>({t:new Date(v.datetime),h:+v.high,l:+v.low,c:+v.close}));
 
