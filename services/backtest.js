@@ -4,6 +4,7 @@ const L=require('./logic');
 const API_KEY=process.env.DATA_KEY;
 
 exports.run=async(symbol,from,to)=>{
+ symbol = symbol.replace("/", "").toUpperCase();
  try{
   symbol = symbol.replace("/", ""); // FIX
 
